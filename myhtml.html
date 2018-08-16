@@ -1,0 +1,293 @@
+<html lang = "en-us">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1> PLAY OR DIE </h1>
+        </header>
+        <div class = 'header'>
+            <h2> Choose Your Weapon</h2>
+        </div>
+        <div class ='ui'>
+            <div id= 'buttons'>
+                <div id = 'rock' class = 'btn'>
+                
+                    <img style = 'object-fit: contain' class = 'resize' src = 'images/rock.png' alt = 'rock'>
+                </div>
+                 <div id = 'paper' class = 'btn'>
+                    
+                    <img style = 'object-fit: contain' class = 'resize' src = 'images/paper.png' alt = 'paper'>
+                </div>
+                <div id = 'scissors' class = 'btn'>
+                    
+                    <img style = 'object-fit: contain' class = 'resize' src = 'images/scissors.png' alt = 'scissors' >
+                </div>
+            </div>
+
+            <div class = 'game'>
+            </div>
+            <div id = 'result'>
+                 <h2 id = 'result'></h2>
+            </div>
+
+            <div id = 'scoreboard'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>player</th>
+                            <th>computer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id = tally>
+                            <td>
+                                <img class = 'resize' src = '' alt = '' id = 'pl'>
+                            </td>    
+                            <td>
+                                <img class = 'resize' src = '' alt = '' id = 'co'>
+                            </td>    
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div id = 'start'>
+                <button>BEGIN</button>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            let roundsPlayed = 0;
+            let playerScore = 0;
+            let computerScore = 0;
+            let started = false; 
+            const playerScoreDisplay = document.querySelector('#pl');
+            const computerScoreDisplay = document.querySelector('#co');
+            const buttons = document.querySelectorAll('.btn');
+            const result = document.querySelector('h2#result');
+            //const playerScoreDisplay = document.querySelector('#player');
+            //const computerScoreDisplay = document.querySelector('#computer')
+            const startButton = document.querySelector('#start button')
+
+            buttons.forEach(button => button.addEventListener("mouseenter", mouseEnter));
+            buttons.forEach(button => button.addEventListener("mouseleave", mouseLeave));
+            buttons.forEach(button => button.addEventListener("click", onClick));
+            startButton.addEventListener('click',gameStarter);
+
+                
+            function gameStarter(e) 
+            {
+            
+                e.target.style.cssText = "display: none";
+                playerScore = 0;
+                computerScore = 0;
+                playerScoreDisplay.src = "";
+                computerScoreDisplay.src = "";
+                result.textContent = "";
+                started = true;
+                document.querySelector('div#result').style.cssText = "display: block;";
+                document.querySelector('div#scoreBoard').style.cssText = "display: flex;";
+            }
+
+            function tallyPicker(winner)
+            {
+                if( winner == 'p')
+                {
+                    
+                    switch (playerScore)
+                    {
+                        case 1:
+                            playerScoreDisplay.src = "images/1.png";
+                            break
+                        case 2:
+                            playerScoreDisplay.src = "images/2.png";
+                            break;
+                        case 3:
+                            playerScoreDisplay.src = "images/3.png";
+                            break
+                        case 4:
+                            playerScoreDisplay.src = "images/4.png";
+                            break;
+                        case 5:
+                            playerScoreDisplay.src = "images/5.png";
+                            break;
+                    }
+                }
+                else
+                {
+                switch(computerScore)
+                    {
+                        case 1:
+                            computerScoreDisplay.src = "images/1.png";
+                            break
+                        case 2:
+                            computerScoreDisplay.src = "images/2.png";
+                            break;
+                        case 3:
+                            computerScoreDisplay.src = "images/3.png";
+                            break
+                        case 4:
+                            computerScoreDisplay.src = "images/4.png";
+                            break;
+                        case 5:
+                            computerScoreDisplay.src = "images/5.png";
+                            break;
+                        
+                    }
+                
+
+                }
+            }
+
+
+            function tally(re,player,computer)
+            {
+                if(re =='w')
+                {
+                    playerScore++;
+                    tallyPicker('p');
+                    return "You win!\n " + "Your destroyed your enemy's " + computer + " with your " + player + "!";
+                }
+                else if(re == 't')
+                {
+                    return "You are both LOSERS";
+                }
+                else
+                {
+                    computerScore++;
+                    tallyPicker('c');
+                    return "You Lose!\n " + "Your enemy destroyed your " + player + " with his " + computer + "!";
+                }
+            }
+            function playGame(player)
+            {
+                computer = getComputer();
+                if (player.toLowerCase() == 'rock')
+                {
+                    if(computer == 'rock')
+                    {
+                        return tally('t',player,computer);
+                    }
+                    else if(computer == 'paper')
+                    {
+                        return tally('l',player,computer);
+                    }
+                    else
+                    {
+                        return tally('w',player,computer);
+                    }
+                }
+                else if (player.toLowerCase() == 'paper')
+                {
+                    if(computer == 'rock')
+                    {
+                        return tally('w',player,computer);
+                    }
+                    
+                    else if(computer == 'paper')
+                    {
+                        return tally('t',player,computer);
+                    }
+                    else
+                    {
+                        return tally('l',player,computer);
+                    }
+                }
+                else 
+                {
+                    if(computer == 'rock')
+                    {
+                        return tally('l',player,computer);
+                    }
+                    
+                    else if(computer == 'paper')
+                    {
+                        return tally('w',player,computer);
+                    }
+                    else
+                    {
+                        return tally('t',player,computer);
+                    }
+                }
+
+            }
+
+            function getComputer()
+            {
+                pick = Math.floor(Math.random() * 3);
+                switch (pick)
+                {
+                    case 0:
+                        return 'rock';
+                        break;
+                    case 1:
+                        return 'paper';
+                        break;
+                    case 2:
+                        return 'scissors';
+                        break;
+                }
+            }
+            function mouseEnter(e) 
+            {
+                if (started) 
+                {
+                    e.target.classList.add('hovered');
+                }
+            }
+
+            function mouseLeave(e) 
+            {
+                e.target.classList.remove('hovered');
+            }
+        
+
+            function onClick(e) 
+            {
+                console.log(e.target);
+                console.log(e.target.getAttribute('alt'));
+                console.log();
+                if (started) 
+                {
+                    let player;
+                    let buttonClicked;
+                   
+                   
+                    buttonClicked = e.target;
+                    if(e.target.getAttribute('alt')== null)
+                    {
+                        console.log(e.target.getAttribute('img'));
+                        player = e.target.querySelector('alt').getAttribute('alt');
+                        
+                    }
+                    else
+                    {
+                        player = e.target.getAttribute('alt');
+                    }
+                    
+                    buttonClicked.classList.toggle('active');
+                    result.textContent = playGame(player);
+                    buttonClicked.classList.toggle('active');
+                }
+                if ((playerScore == 5) || (computerScore == 5)) 
+                {
+                    if (playerScore > computerScore) 
+                    {
+                        result.textContent = "You Live";
+                    } 
+                    else 
+                    {
+                        result.textContent = "You Die.";
+                    }
+                    startButton.textContent = "Play Again!";
+                    startButton.style.cssText = "display: inline";
+                    started = false;
+                }
+            }
+                            
+                        
+        </script>
+    </body>
+</html>
+

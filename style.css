@@ -1,0 +1,148 @@
+body {
+  background: black;
+  font-family: 'Nunito', sans-serif;
+  color: #000000;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 2.8em;
+}
+
+h2 {
+  color: #ffffff;
+  font-size: 2em;
+}
+
+header {
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.ui {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.ui #buttons {
+  
+  display: flex;
+  padding-bottom: 30px;
+}
+
+.ui .btn {
+  
+  width: 30%;
+  margin-right: 5%;
+  border: 1px solid black;
+  border-radius: 5px;
+  background:#ffffff;
+  text-align: center;
+  -webkit-transition: all .07s ease;
+  transition: all .07s ease;
+  
+}
+img.resize {
+  max-width:25ex;
+  max-height:25ex;
+} 
+.ui .btn:last-child {
+  margin-right: 0;
+}
+
+.ui .btn.hovered {
+
+  border: 6px;
+  background-color: #bb4646;
+}
+
+.ui .btn.active {
+
+  border: 6px;
+  
+}
+
+.btn i {
+
+  font-size: 70px;
+  
+  transition: all .07s ease;
+  -webkit-transition: all .09s ease;
+}
+
+.btn.hovered i {
+  transform: scale(1.5);
+  
+}
+
+div#result {
+  display: none;
+}
+
+#result h2 {
+  text-align: center;
+  transition: all .07s ease;
+  -webkit-transition: all .09s ease;
+}
+
+div#scoreBoard {
+  display: none;
+  /*display: flex;*/
+  overflow-x: scoreBoard;
+}
+
+table {
+  text-align: center;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+table thead {
+  font-size: 24px;
+  background: #ffffff;
+}
+
+table tbody {
+  background: #000000;
+}
+
+table thead th {
+  padding: 20px 20px;
+}
+
+table, th, td {
+   
+  padding: 10px 10px;
+  width: 100px;
+}
+
+#start {
+  text-align: center;
+}
+
+#start button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  border: 1px solid #ffffffff;
+  border-radius: 5px;
+  margin-top: 40px;
+}
+
+#start button:hover, #gameStart button:active {
+  
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  background: #ffaa93;
+}
